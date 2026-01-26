@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KiDOM: S13 - D1 - El Arquitecto del Caos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Raleway:wght@800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --kidom-blue: #2667ff;
+            --kidom-yellow-accent: #FBBF24; 
+            --medium-text: #4B5563; 
+        }
+
+        /* AJUSTE PARA TV: Zoom automático en pantallas grandes */
+        @media screen and (min-width: 1500px) {
+            body { zoom: 1.2; } 
+        }
+
+        html, body { height: 100%; width: 100%; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; overflow: hidden; background-color: var(--medium-text); }
+        #slides-container { width: 100%; height: 100%; display: flex; position: relative; }
+        
+        .slide { flex-shrink: 0; width: 100%; height: 100%; display: flex; flex-direction: column; position: relative; overflow: hidden; display: none; }
+        @media (min-width: 768px) { .slide { flex-direction: row; } }
+        .slide.active { display: flex; }
+
+        /* COLUMNA IZQUIERDA: IMAGEN Y VALORES */
+        .image-column { width: 100%; background-color: #FFFFFF; padding: 2rem; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; align-items: center; height: 50%; border: 2mm solid var(--kidom-blue); border-right: none; }
+        @media (min-width: 768px) { .image-column { width: 50%; height: 100%; } }
+        
+        .image-column-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; }
+        .top-logo-placeholder { max-width: 320px; height: 90px; flex-shrink: 0; margin-bottom: 1rem; }
+        .top-logo-placeholder img { width: 100%; height: 100%; object-fit: contain; }
+        .image-guide { width: 100%; height: 100%; max-width: 90%; max-height: 48vh; display: flex; align-items: center; justify-content: center; flex-grow: 1; background-color: #FFFFFF; border: none; overflow: hidden; }
+        .image-guide img { width: 100%; height: 100%; object-fit: contain; }
+        
+        .bottom-values-container { position: relative; width: 100%; flex-shrink: 0; margin-top: 1rem; padding-bottom: 0.5rem; }
+        .value-line { display: flex; justify-content: center; flex-wrap: nowrap; gap: 0.6rem; }
+        .value-item { font-weight: 700; color: var(--medium-text); font-size: 0.75rem; text-transform: uppercase; display: flex; align-items: center;}
+        .lider-letter { background-color: var(--medium-text); color: #FFFFFF; font-weight: 900; font-size: 0.9rem; border-radius: 50%; width: 1.5rem; height: 1.5rem; display: inline-flex; align-items: center; justify-content: center; margin-right: 0.2rem; flex-shrink: 0;}
+
+        /* COLUMNA DERECHA: CONTENIDO AZUL */
+        .content-column { width: 100%; background-color: var(--kidom-blue); color: #FFFFFF; padding: 2.5rem; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; height: 50%; border-top: 2mm solid var(--kidom-yellow-accent); border-right: 2mm solid var(--kidom-yellow-accent); border-bottom: 2mm solid var(--kidom-yellow-accent); border-left: none; position: relative; }
+        @media (min-width: 768px) { .content-column { width: 50%; height: 100%; } }
+        
+        .logo-placeholder { position: absolute; top: 1.5rem; right: 1.5rem; width: 110px; height: 110px; z-index: 15; }
+        .logo-placeholder img { width: 100%; height: 100%; object-fit: contain;}
+
+        .main-content-wrapper { display: flex; flex-direction: column; flex-grow: 1; min-height: 0; margin-top: 2.5rem; }
+        .phase-title { color: #FFFFFF; font-size: 1.25rem; font-weight: 700; opacity: 0.8; margin: 0; }
+        .activity-title { color: #FFFFFF; font-size: 2.1rem; line-height: 1.1; font-weight: 900; margin: 0.3rem 0; text-transform: uppercase; }
+        .group-name-display { color: var(--kidom-yellow-accent); font-size: 1.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1.8rem; } 
+        
+        .instructions-list { text-align: left; font-size: 1.3rem; color: #F3F4F6; list-style: none; padding: 0; overflow-y: auto; flex-grow: 1; }
+        .instructions-list li { margin-bottom: 1.3rem; }
+        .list-title { display: flex; align-items: center; font-weight: 900; color: #FFFFFF; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1.2px;}
+        .list-icon { margin-right: 0.6rem; font-size: 1.4rem; color: var(--kidom-yellow-accent); flex-shrink: 0; }
+        .list-text { padding-left: 2rem; font-weight: 400; line-height: 1.4; }
+
+        .content-bottom { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; padding-top: 1rem; }
+        .timer-display { font-family: 'Raleway', sans-serif; font-weight: 800; color: var(--kidom-yellow-accent); font-size: 5.5rem; line-height: 1; }
+        .nav-button { background-color: #FFFFFF; color: var(--kidom-blue); font-weight: 700; font-size: 1.1rem; padding: 0.7rem 1.4rem; border-radius: 0.6rem; cursor: pointer; border: none; }
+    </style>
+</head>
+<body>
+
+    <div id="slides-container">
+        <div class="slide active" data-duration="300">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/haEBwZw.png"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line"><span class="value-item"><span class="lider-letter">L</span>Liderazgo</span><span class="value-item"><span class="lider-letter">I</span>Integridad</span><span class="value-item"><span class="lider-letter">D</span>Disciplina</span><span class="value-item"><span class="lider-letter">E</span>Empatía</span><span class="value-item"><span class="lider-letter">R</span>Responsabilidad</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-placeholder"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                <div class="main-content-wrapper">
+                    <h2 class="phase-title">Fase 1: Saludo</h2>
+                    <h3 class="activity-title">Frecuencia de Mando</h3>
+                    <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    <ul class="instructions-list">
+                        <li><div class="list-title"><span class="list-icon">⚙️</span>Ejecución:</div><div class="list-text">Trote táctico. El Coach levanta tarjetas de colores: Azul (3 Burpees), Rojo (Sprint 5m), Amarillo (Salto Tuck).</div></li>
+                        <li><div class="list-title"><span class="list-icon">📢</span>Guion:</div><div class="list-text">"¡Ojos abiertos, mente rápida! El color manda, tu cuerpo ejecuta. ¡Procesen y actúen ahora!"</div></li>
+                        <li><div class="list-title"><span class="list-icon">💡</span>PNL:</div><div class="list-text">"Observo, decido y actúo con la precisión de un líder preparado para todo."</div></li>
+                    </ul>
+                </div>
+                <div class="content-bottom"><div class="timer-display">05:00</div><button class="nav-button" onclick="navigate(1)">Sig.</button></div>
+            </div>
+        </div>
+
+        <div class="slide" data-duration="600">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/oVD1Ogx.png"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line"><span class="value-item"><span class="lider-letter">L</span>Liderazgo</span><span class="value-item"><span class="lider-letter">I</span>Integridad</span><span class="value-item"><span class="lider-letter">D</span>Disciplina</span><span class="value-item"><span class="lider-letter">E</span>Empatía</span><span class="value-item"><span class="lider-letter">R</span>Responsabilidad</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-placeholder"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                <div class="main-content-wrapper">
+                    <h2 class="phase-title">Fase 2: Fundamentos</h2>
+                    <h3 class="activity-title">El Robot Descompuesto</h3>
+                    <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    <ul class="instructions-list">
+                        <li><div class="list-title"><span class="list-icon">⚙️</span>Ejecución:</div><div class="list-text">Cuadrupedia baja (Oso). Al grito de "¡ERROR!", levantar mano derecha y pie izquierdo simultáneamente. Mantener 5s.</div></li>
+                        <li><div class="list-title"><span class="list-icon">📢</span>Guion:</div><div class="list-text">"¡Bloqueen el sistema! Encuentren su centro de gravedad. ¡Nadie se cae, son tecnología KiDOM!"</div></li>
+                        <li><div class="list-title"><span class="list-icon">💡</span>PNL:</div><div class="list-text">"Incluso en el desequilibrio aparente, mi mente encuentra estabilidad y control total."</div></li>
+                    </ul>
+                </div>
+                <div class="content-bottom"><div class="timer-display">10:00</div><button class="nav-button" onclick="navigate(1)">Sig.</button></div>
+            </div>
+        </div>
+
+        <div class="slide" data-duration="900">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/qddO9YT.png"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line"><span class="value-item"><span class="lider-letter">L</span>Liderazgo</span><span class="value-item"><span class="lider-letter">I</span>Integridad</span><span class="value-item"><span class="lider-letter">D</span>Disciplina</span><span class="value-item"><span class="lider-letter">E</span>Empatía</span><span class="value-item"><span class="lider-letter">R</span>Responsabilidad</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-placeholder"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                <div class="main-content-wrapper">
+                    <h2 class="phase-title">Fase 3: Hito</h2>
+                    <h3 class="activity-title">Escudo de Reacción</h3>
+                    <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    <ul class="instructions-list">
+                        <li><div class="list-title"><span class="list-icon">⚙️</span>Ejecución:</div><div class="list-text">Duelo por parejas con balón central. Escuchar la historia del Coach. Palabra clave: "LÍDER" para atrapar el balón.</div></li>
+                        <li><div class="list-title"><span class="list-icon">📢</span>Guion:</div><div class="list-text">"¡Enfoque láser! La narrativa avanza... ¡LÍDER! ¡Protejan su objetivo con velocidad de rayo!"</div></li>
+                        <li><div class="list-title"><span class="list-icon">🏆</span>KC:</div><div class="list-text">5 KC por ganar 3 duelos directos con reacción pura y sin anticiparse.</div></li>
+                    </ul>
+                </div>
+                <div class="content-bottom"><div class="timer-display">15:00</div><button class="nav-button" onclick="navigate(1)">Sig.</button></div>
+            </div>
+        </div>
+
+        <div class="slide" data-duration="900">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/zpDyDlz.png"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line"><span class="value-item"><span class="lider-letter">L</span>Liderazgo</span><span class="value-item"><span class="lider-letter">I</span>Integridad</span><span class="value-item"><span class="lider-letter">D</span>Disciplina</span><span class="value-item"><span class="lider-letter">E</span>Empatía</span><span class="value-item"><span class="lider-letter">R</span>Responsabilidad</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-placeholder"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                <div class="main-content-wrapper">
+                    <h2 class="phase-title">Fase 4: Mover y Aprender</h2>
+                    <h3 class="activity-title">Cacería Táctica</h3>
+                    <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    <ul class="instructions-list">
+                        <li><div class="list-title"><span class="list-icon">⚙️</span>Ejecución:</div><div class="list-text">Intercepción de discos/platillos al aire. En el aire (3 pts), tras rebote (1 pto). Competencia por equipos.</div></li>
+                        <li><div class="list-title"><span class="list-icon">📢</span>Guion:</div><div class="list-text">"¡Dominio aéreo! No dejen que sus sueños toquen el suelo. ¡Vuelen por ese punto!"</div></li>
+                        <li><div class="list-title"><span class="list-icon">💡</span>PNL:</div><div class="list-text">"Siempre busco el éxito en lo más alto; alcanzo mis metas con determinación y salto."</div></li>
+                    </ul>
+                </div>
+                <div class="content-bottom"><div class="timer-display">15:00</div><button class="nav-button" onclick="navigate(1)">Sig.</button></div>
+            </div>
+        </div>
+
+        <div class="slide" data-duration="420">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/O451F4L.png"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line"><span class="value-item"><span class="lider-letter">L</span>Liderazgo</span><span class="value-item"><span class="lider-letter">I</span>Integridad</span><span class="value-item"><span class="lider-letter">D</span>Disciplina</span><span class="value-item"><span class="lider-letter">E</span>Empatía</span><span class="value-item"><span class="lider-letter">R</span>Responsabilidad</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-placeholder"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                <div class="main-content-wrapper">
+                    <h2 class="phase-title">Fase 5: Reto Equipo</h2>
+                    <h3 class="activity-title">Rescate del Comandante</h3>
+                    <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    <ul class="instructions-list">
+                        <li><div class="list-title"><span class="list-icon">⚙️</span>Ejecución:</div><div class="list-text">Transporte de un compañero sobre colchoneta a la altura de la cintura. Superar obstáculos sin que toque el suelo.</div></li>
+                        <li><div class="list-title"><span class="list-icon">📢</span>Guion:</div><div class="list-text">"¡Fuerza en equipo! La estabilidad de su líder depende de sus brazos coordinados. ¡Adelante!"</div></li>
+                        <li><div class="list-title"><span class="list-icon">🏆</span>KC:</div><div class="list-text">5 KC por completar el tramo de 10m sin balanceos peligrosos ni paradas.</div></li>
+                    </ul>
+                </div>
+                <div class="content-bottom"><div class="timer-display">07:00</div><button class="nav-button" onclick="navigate(1)">Sig.</button></div>
+            </div>
+        </div>
+
+        <div class="slide" data-duration="180">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/nbJ2uEb.png"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line"><span class="value-item"><span class="lider-letter">L</span>Liderazgo</span><span class="value-item"><span class="lider-letter">I</span>Integridad</span><span class="value-item"><span class="lider-letter">D</span>Disciplina</span><span class="value-item"><span class="lider-letter">E</span>Empatía</span><span class="value-item"><span class="lider-letter">R</span>Responsabilidad</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-placeholder"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                <div class="main-content-wrapper">
+                    <h2 class="phase-title">Fase 6: Cierre</h2>
+                    <h3 class="activity-title">Eco de la Visión</h3>
+                    <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    <ul class="instructions-list">
+                        <li><div class="list-title"><span class="list-icon">⚙️</span>Ejecución:</div><div class="list-text">Afirmaciones corales con ojos cerrados. Visualización del éxito semanal. Aplauso rítmico final.</div></li>
+                        <li><div class="list-title"><span class="list-icon">📢</span>Guion:</div><div class="list-text">"Semana 13. Nuevos retos, el mismo corazón de líder. ¡Véanse lográndolo!"</div></li>
+                        <li><div class="list-title"><span class="list-icon">💡</span>PNL:</div><div class="list-text">"Lo que mi mente puede visualizar con claridad, mi cuerpo tiene el poder de construir."</div></li>
+                    </ul>
+                </div>
+                <div class="content-bottom"><div class="timer-display">03:00</div><button class="nav-button" onclick="navigate(-5)">Reset</button></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        let timerInterval = null;
+
+        function formatTime(s) {
+            return `${Math.floor(s/60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`;
+        }
+
+        function startTimer(duration, display) {
+            clearInterval(timerInterval);
+            let t = duration;
+            display.textContent = formatTime(t);
+            timerInterval = setInterval(() => {
+                if (--t < 0) {
+                    clearInterval(timerInterval);
+                    if (currentSlide < slides.length - 1) {
+                        setTimeout(() => navigate(1), 1000); 
+                    }
+                } else {
+                    display.textContent = formatTime(t);
+                }
+            }, 1000);
+        }
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+            currentSlide = index;
+            const display = slides[index].querySelector('.timer-display');
+            const duration = parseInt(slides[index].getAttribute('data-duration'));
+            if (display && duration) startTimer(duration, display);
+        }
+
+        function navigate(dir) {
+            let n = currentSlide + dir;
+            if (n >= 0 && n < slides.length) showSlide(n);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') navigate(1);
+            if (e.key === 'ArrowLeft') navigate(-1);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => showSlide(0));
+    </script>
+</body>
+</html>

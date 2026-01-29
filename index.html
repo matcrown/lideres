@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KiDOM: S12 - D3 - El Comandante en el Caos</title>
+    <title>KiDOM: S12 - D4 - Sincronía y Caos</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Raleway:wght@800&display=swap" rel="stylesheet">
     
     <style>
@@ -25,7 +25,6 @@
             flex-shrink: 0; width: 100%; height: 100%;
             display: none; flex-direction: column; position: relative; overflow: hidden;
         }
-        /* AJUSTE TV: Aseguramos flujo horizontal en pantallas anchas */
         @media (min-width: 768px) { .slide { flex-direction: row; } }
         .slide.active { display: flex; }
 
@@ -61,34 +60,34 @@
         }
 
         .content-column {
-            width: 100%; background-color: var(--kidom-blue); color: #FFFFFF; padding: 2rem; 
-            box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; 
-            height: 50%; border: 3mm solid var(--kidom-yellow-accent);
+            width: 100%; background-color: var(--kidom-blue); color: #FFFFFF; padding: 2.5rem; 
+            box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-start; 
+            height: 50%; border-top: 2mm solid var(--kidom-yellow-accent); 
+            border-right: 2mm solid var(--kidom-yellow-accent); border-bottom: 2mm solid var(--kidom-yellow-accent);
+            position: relative;
         }
         @media (min-width: 768px) { .content-column { width: 50%; height: 100%; } }
 
-        .logo-container { flex-shrink: 0; margin-bottom: 0.5rem; position: relative; min-height: 50px; } 
-        .logo-placeholder { position: absolute; top: -3.25rem; right: -3.75rem; width: 142px; height: 142px; z-index: 15; padding: 1rem; box-sizing: border-box; cursor: pointer;}
-        .logo-placeholder img { width: 100%; height: 100%; object-fit: contain;}
+        .logo-placeholder { position: absolute; top: 20px; right: 20px; width: 120px; z-index: 100; cursor: pointer;}
+        .logo-placeholder img { width: 100%; height: auto; object-fit: contain;}
         
-        .main-content-wrapper { display: flex; flex-direction: column; flex-grow: 1; min-height: 0; }
-        .content-header-area { padding-top: 2.5rem; flex-shrink: 0; }
-        .phase-title { color: #FFFFFF; font-size: 1.125rem; font-weight: 700; opacity: 0.8; }
+        .main-content-wrapper { display: flex; flex-direction: column; flex-grow: 1; min-height: 0; padding-right: 1.5rem; }
+        .content-header-area { padding-top: 1rem; margin-bottom: 1rem; flex-shrink: 0; }
+        .phase-title { color: #FFFFFF; font-size: 1.1rem; font-weight: 700; opacity: 0.85; margin: 0; }
         .activity-title { color: #FFFFFF; font-size: 2.2rem; line-height: 1.1; font-weight: 900; text-transform: uppercase; margin: 0.5rem 0; }
-        .group-name-display { color: var(--kidom-yellow-accent); font-size: 1.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 2rem; } 
+        .group-name-display { color: var(--kidom-yellow-accent); font-size: 1.6rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1.5rem; } 
         
-        /* AJUSTE TV: Texto más visible */
-        .instructions-list { text-align: left; font-size: 1.5rem; color: #F3F4F6; list-style: none; padding-left: 0; overflow-y: auto; flex-grow: 1; }
-        .instructions-list li { margin-bottom: 1.5rem; }
-        .list-title { display: flex; align-items: center; font-weight: 900; color: #FFFFFF; font-size: 1.2rem; }
-        .list-icon { margin-right: 0.75rem; font-size: 1.6rem; color: var(--kidom-yellow-accent); flex-shrink: 0; }
-        .list-text { padding-left: 2.5rem; color: #F3F4F6; font-weight: 500; line-height: 1.3; }
+        .instructions-list { text-align: left; font-size: 1.4rem; color: #F3F4F6; list-style: none; padding-left: 0; overflow-y: auto; flex-grow: 1; }
+        .instructions-list li { margin-bottom: 1.5rem; line-height: 1.3; }
+        .list-title { display: flex; align-items: center; font-weight: 700; color: #FFFFFF; text-transform: uppercase; font-size: 1rem; margin-bottom: 0.25rem; }
+        .list-icon { margin-right: 0.75rem; font-size: 1.2rem; color: var(--kidom-yellow-accent); flex-shrink: 0; }
+        .list-text { padding-left: 1.7rem; color: #E5E7EB; font-weight: 400; }
 
-        .content-bottom { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; padding-top: 1rem; flex-shrink: 0; }
-        .timer-display { font-family: 'Raleway', sans-serif; font-weight: 900; color: var(--kidom-yellow-accent); font-size: 7rem; line-height: 1; font-variant-numeric: tabular-nums; }
-        .navigation-buttons { display: flex; gap: 0.8rem; }
-        .nav-button { background-color: #FFFFFF; color: var(--kidom-blue); font-weight: 900; font-size: 1.2rem; padding: 1rem 2rem; border-radius: 0.6rem; cursor: pointer; border: none; text-transform: uppercase; }
-        .nav-button:disabled { opacity: 0.3; }
+        .content-bottom { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; margin-top: 1rem; flex-shrink: 0; }
+        .timer-display { font-family: 'Raleway', sans-serif; font-weight: 800; color: var(--kidom-yellow-accent); font-size: 6rem; line-height: 1; font-variant-numeric: tabular-nums; }
+        .navigation-buttons { display: flex; gap: 0.5rem; }
+        .nav-button { background-color: #FFFFFF; color: var(--kidom-blue); font-weight: 700; font-size: 1.1rem; padding: 1rem 1.8rem; border-radius: 0.5rem; cursor: pointer; border: none; }
+        .nav-button:disabled { opacity: 0.5; }
     </style>
 </head>
 <body>
@@ -99,7 +98,7 @@
             <div class="image-column">
                 <div class="image-column-wrapper">
                     <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
-                    <div class="image-guide"><img src="https://i.imgur.com/7r6VMT7.png" alt="Interruptor Humano"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/SaudKzh.png" alt="Saludo"></div>
                     <div class="bottom-values-container">
                         <div class="value-line">
                             <span class="value-item"><span class="lider-letter">L</span>iderazgo</span>
@@ -112,35 +111,29 @@
                 </div>
             </div>
             <div class="content-column">
-                <div class="logo-container">
-                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
-                </div>
+                <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
                 <div class="main-content-wrapper">
                     <div class="content-header-area">
                         <h2 class="phase-title">Fase 1 de 6: Saludo y Afirmación</h2>
-                        <h3 class="activity-title">EL INTERRUPTOR HUMANO</h3>
+                        <h3 class="activity-title">TROTE DEL NÚMERO MÁGICO</h3>
                         <p class="group-name-display">LÍDERES, SEMANA 12</p>
                     </div>
                     <ul class="instructions-list">
                         <li>
                             <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
-                            <div class="list-text">Mano ARRIBA: ¡Salto explosivo! Mano ABAJO: ¡Cuerpo a tierra! Si fallo, 3 burpees. ¡Velocidad de rayo, Líderes!</div>
+                            <div class="list-text">¡Escaneen el área! Al número... ¡TRES! Formen grupo y hagan su saludo secreto. Si sobran: ¡3 burpees de recarga!</div>
                         </li>
                         <li>
                             <div class="list-title"><span class="list-icon">💡</span> <strong>PNL:</strong></div>
-                            <div class="list-text">"Mis reflejos son agudos; mi cuerpo responde al instante a mi voluntad."</div>
-                        </li>
-                        <li>
-                            <div class="list-title"><span class="list-icon">🏆</span> <strong>Oportunidad KC:</strong></div>
-                            <div class="list-text">**(1 KC)** Reacción Perfecta: Completar la secuencia sin errores.</div>
+                            <div class="list-text">"Soy parte de un equipo y mi valor crece cuando nos unimos con rapidez."</div>
                         </li>
                     </ul>
                 </div>
                 <div class="content-bottom">
                     <div class="timer-display">05:00</div>
                     <div class="navigation-buttons">
-                        <button class="nav-button prevBtn" onclick="navigate(-1)" disabled>Anterior</button>
-                        <button class="nav-button nextBtn" onclick="navigate(1)">Siguiente</button>
+                        <button class="nav-button prevBtn" onclick="navigate(-1)" disabled>Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)">Sig.</button>
                     </div>
                 </div>
             </div>
@@ -150,44 +143,46 @@
             <div class="image-column">
                 <div class="image-column-wrapper">
                     <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
-                    <div class="image-guide"><img src="https://i.imgur.com/LHYaDMT.png" alt="Caza-Talones Oso"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/mYmcZhq.png" alt="Fundamentos"></div>
                     <div class="bottom-values-container">
                         <div class="value-line">
-                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span>
+                            <span class="value-item"><span class="lider-letter">I</span>ntegridad</span>
+                            <span class="value-item"><span class="lider-letter">D</span>isciplina</span>
+                            <span class="value-item"><span class="lider-letter">E</span>mpatía</span>
+                            <span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="content-column">
-                <div class="logo-container">
-                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
-                </div>
+                <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
                 <div class="main-content-wrapper">
                     <div class="content-header-area">
                         <h2 class="phase-title">Fase 2 de 6: Fundamentos</h2>
-                        <h3 class="activity-title">CAZA-TALONES DE OSO</h3>
+                        <h3 class="activity-title">PLANCHA "MINA TERRESTRE"</h3>
                         <p class="group-name-display">LÍDERES, SEMANA 12</p>
                     </div>
                     <ul class="instructions-list">
                         <li>
+                            <div class="list-title"><span class="list-icon">⚙️</span> <strong>Ejecución:</strong></div>
+                            <div class="list-text">Deslizar 5 platillos bajo el pecho del compañero en plancha sin tocarlo.</div>
+                        </li>
+                        <li>
                             <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
-                            <div class="list-text">Posición de oso. Busquen los talones de sus compañeros, pero ¡protejan los suyos! Mantengan la cadera baja.</div>
+                            <div class="list-text">"Tu core es un escudo de acero. Nada lo atraviesa, nada lo derriba. ¡Resiste!"</div>
                         </li>
                         <li>
                             <div class="list-title"><span class="list-icon">💡</span> <strong>PNL:</strong></div>
-                            <div class="list-text">"Soy ágil, fuerte y siempre consciente de lo que ocurre a mi alrededor."</div>
-                        </li>
-                        <li>
-                            <div class="list-title"><span class="list-icon">🏆</span> <strong>Oportunidad KC:</strong></div>
-                            <div class="list-text">**(2 KC)** Agilidad de Élite: Tocar 3 talones sin ser tocado.</div>
+                            <div class="list-text">"Mi estabilidad es mi fuerza; soy inamovible ante cualquier desafío."</div>
                         </li>
                     </ul>
                 </div>
                 <div class="content-bottom">
                     <div class="timer-display">10:00</div>
                     <div class="navigation-buttons">
-                        <button class="nav-button prevBtn" onclick="navigate(-1)">Anterior</button>
-                        <button class="nav-button nextBtn" onclick="navigate(1)">Siguiente</button>
+                        <button class="nav-button prevBtn" onclick="navigate(-1)">Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)">Sig.</button>
                     </div>
                 </div>
             </div>
@@ -197,44 +192,46 @@
             <div class="image-column">
                 <div class="image-column-wrapper">
                     <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
-                    <div class="image-guide"><img src="https://i.imgur.com/Nhgtu2S.png" alt="Duelo de Platillos"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/ogcLndH.png" alt="Hito"></div>
                     <div class="bottom-values-container">
                         <div class="value-line">
-                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span>
+                            <span class="value-item"><span class="lider-letter">I</span>ntegridad</span>
+                            <span class="value-item"><span class="lider-letter">D</span>ISCIPLINA</span>
+                            <span class="value-item"><span class="lider-letter">E</span>MPATÍA</span>
+                            <span class="value-item"><span class="lider-letter">R</span>ESPONSABILIDAD</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="content-column">
-                <div class="logo-container">
-                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
-                </div>
+                <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
                 <div class="main-content-wrapper">
                     <div class="content-header-area">
                         <h2 class="phase-title">Fase 3 de 6: Hito</h2>
-                        <h3 class="activity-title">DUELO DE PLATILLOS</h3>
+                        <h3 class="activity-title">DECISIÓN RELÁMPAGO</h3>
                         <p class="group-name-display">LÍDERES, SEMANA 12</p>
                     </div>
                     <ul class="instructions-list">
                         <li>
+                            <div class="list-title"><span class="list-icon">⚙️</span> <strong>Ejecución:</strong></div>
+                            <div class="list-text">10 saltos tuck + sprint. Tocar el cono del color de la tarjeta en <1s.</div>
+                        </li>
+                        <li>
                             <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
-                            <div class="list-text">Escuchen el color... ¡AZUL! El primero en atraparlo gana el punto. ¡Enfoque láser, Líderes!</div>
+                            <div class="list-text">"¡Cerebro en modo rayo! Tu cuerpo está cansado, pero tu mente manda. ¡AZUL!"</div>
                         </li>
                         <li>
-                            <div class="list-title"><span class="list-icon">💡</span> <strong>PNL:</strong></div>
-                            <div class="list-text">"Bajo fatiga, mi mente se vuelve más nítida y decidida."</div>
-                        </li>
-                        <li>
-                            <div class="list-title"><span class="list-icon">🏆</span> <strong>Oportunidad KC:</strong></div>
-                            <div class="list-text">**(5 KC)** Ganador del Duelo: Por ganar 3 de 5 rondas de reacción.</div>
+                            <div class="list-title"><span class="list-icon">🏆</span> <strong>KC:</strong></div>
+                            <div class="list-text">5 KC por 3 aciertos seguidos sin dudar ni un milisegundo.</div>
                         </li>
                     </ul>
                 </div>
                 <div class="content-bottom">
                     <div class="timer-display">15:00</div>
                     <div class="navigation-buttons">
-                        <button class="nav-button prevBtn" onclick="navigate(-1)">Anterior</button>
-                        <button class="nav-button nextBtn" onclick="navigate(1)">Siguiente</button>
+                        <button class="nav-button prevBtn" onclick="navigate(-1)">Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)">Sig.</button>
                     </div>
                 </div>
             </div>
@@ -244,44 +241,46 @@
             <div class="image-column">
                 <div class="image-column-wrapper">
                     <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
-                    <div class="image-guide"><img src="https://i.imgur.com/3yrx32S.png" alt="Fútbol-Mano"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/lerZB7v.png" alt="Mover"></div>
                     <div class="bottom-values-container">
                         <div class="value-line">
-                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span>
+                            <span class="value-item"><span class="lider-letter">I</span>NTEGRIDAD</span>
+                            <span class="value-item"><span class="lider-letter">D</span>ISCIPLINA</span>
+                            <span class="value-item"><span class="lider-letter">E</span>MPATÍA</span>
+                            <span class="value-item"><span class="lider-letter">R</span>ESPONSABILIDAD</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="content-column">
-                <div class="logo-container">
-                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
-                </div>
+                <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
                 <div class="main-content-wrapper">
                     <div class="content-header-area">
                         <h2 class="phase-title">Fase 4 de 6: Mover y Aprender</h2>
-                        <h3 class="activity-title">FÚTBOL-MANO EXPLOSIVO</h3>
+                        <h3 class="activity-title">CACERÍA DE DISCOS LÁSER</h3>
                         <p class="group-name-display">LÍDERES, SEMANA 12</p>
                     </div>
                     <ul class="instructions-list">
                         <li>
+                            <div class="list-title"><span class="list-icon">⚙️</span> <strong>Ejecución:</strong></div>
+                            <div class="list-text">Aros numerados. Solo el número llamado intercepta el disco en el aire.</div>
+                        </li>
+                        <li>
                             <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
-                            <div class="list-text">¡Pasen rápido! Solo 2 segundos con el balón. Muévanse al espacio libre. ¡Estrategia en equipo!</div>
+                            <div class="list-text">"¡Base CINCO, FUEGO! Intercepten antes de que toque el suelo."</div>
                         </li>
                         <li>
                             <div class="list-title"><span class="list-icon">💡</span> <strong>PNL:</strong></div>
-                            <div class="list-text">"Confío en mi escuadrón; juntos movemos la meta hacia la victoria."</div>
-                        </li>
-                        <li>
-                            <div class="list-title"><span class="list-icon">🏆</span> <strong>Oportunidad KC:</strong></div>
-                            <div class="list-text">**(3 KC)** Maestro del Pase: Por 3 asistencias efectivas sin retener el balón.</div>
+                            <div class="list-text">"Estoy listo para la acción en cualquier momento y bajo cualquier señal."</div>
                         </li>
                     </ul>
                 </div>
                 <div class="content-bottom">
                     <div class="timer-display">15:00</div>
                     <div class="navigation-buttons">
-                        <button class="nav-button prevBtn" onclick="navigate(-1)">Anterior</button>
-                        <button class="nav-button nextBtn" onclick="navigate(1)">Siguiente</button>
+                        <button class="nav-button prevBtn" onclick="navigate(-1)">Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)">Sig.</button>
                     </div>
                 </div>
             </div>
@@ -291,44 +290,46 @@
             <div class="image-column">
                 <div class="image-column-wrapper">
                     <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
-                    <div class="image-guide"><img src="https://i.imgur.com/Koqhttn.png" alt="Oruga de Balones"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/G4yppaC.png" alt="Reto"></div>
                     <div class="bottom-values-container">
                         <div class="value-line">
-                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                            <span class="value-item"><span class="lider-letter">L</span>IDERAZGO</span>
+                            <span class="value-item"><span class="lider-letter">I</span>NTEGRIDAD</span>
+                            <span class="value-item"><span class="lider-letter">D</span>ISCIPLINA</span>
+                            <span class="value-item"><span class="lider-letter">E</span>MPATÍA</span>
+                            <span class="value-item"><span class="lider-letter">R</span>ESPONSABILIDAD</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="content-column">
-                <div class="logo-container">
-                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
-                </div>
+                <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
                 <div class="main-content-wrapper">
                     <div class="content-header-area">
                         <h2 class="phase-title">Fase 5 de 6: Reto en Equipo</h2>
-                        <h3 class="activity-title">LA ORUGA DE BALONES</h3>
+                        <h3 class="activity-title">EL DOMO DE RESISTENCIA</h3>
                         <p class="group-name-display">LÍDERES, SEMANA 12</p>
                     </div>
                     <ul class="instructions-list">
                         <li>
+                            <div class="list-title"><span class="list-icon">⚙️</span> <strong>Ejecución:</strong></div>
+                            <div class="list-text">Círculo de espaldas, brazos entrelazados. Sentadilla isométrica 45 seg.</div>
+                        </li>
+                        <li>
                             <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
-                            <div class="list-text">¡Arriba los brazos! Pasen la carga con seguridad. Si cae, volvemos a empezar. ¡Sincronía total!</div>
+                            <div class="list-text">"Sientan el apoyo del equipo. El Domo es inquebrantable si todos resisten."</div>
                         </li>
                         <li>
-                            <div class="list-title"><span class="list-icon">💡</span> <strong>PNL:</strong></div>
-                            <div class="list-text">"Mi esfuerzo individual sostiene la carga de todo mi equipo."</div>
-                        </li>
-                        <li>
-                            <div class="list-title"><span class="list-icon">🏆</span> <strong>Oportunidad KC:</strong></div>
-                            <div class="list-text">**(5 KC)** Cadena de Acero: Completar 3 rondas sin que el balón toque el suelo.</div>
+                            <div class="list-title"><span class="list-icon">🏆</span> <strong>KC:</strong></div>
+                            <div class="list-text">5 KC por aguantar el tiempo completo sin que el círculo se rompa.</div>
                         </li>
                     </ul>
                 </div>
                 <div class="content-bottom">
                     <div class="timer-display">07:00</div>
                     <div class="navigation-buttons">
-                        <button class="nav-button prevBtn" onclick="navigate(-1)">Anterior</button>
-                        <button class="nav-button nextBtn" onclick="navigate(1)">Siguiente</button>
+                        <button class="nav-button prevBtn" onclick="navigate(-1)">Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)">Sig.</button>
                     </div>
                 </div>
             </div>
@@ -338,10 +339,14 @@
             <div class="image-column">
                 <div class="image-column-wrapper">
                     <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
-                    <div class="image-guide"><img src="https://i.imgur.com/vaNf6wn.png" alt="Cierre"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/HzrfB5Q.png" alt="Cierre"></div>
                     <div class="bottom-values-container">
                         <div class="value-line">
-                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                            <span class="value-item"><span class="lider-letter">L</span>IDERAZGO</span>
+                            <span class="value-item"><span class="lider-letter">I</span>NTEGRIDAD</span>
+                            <span class="value-item"><span class="lider-letter">D</span>ISCIPLINA</span>
+                            <span class="value-item"><span class="lider-letter">E</span>MPATÍA</span>
+                            <span class="value-item"><span class="lider-letter">R</span>ESPONSABILIDAD</span>
                         </div>
                     </div>
                 </div>
@@ -359,23 +364,19 @@
                     <ul class="instructions-list">
                         <li>
                             <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
-                            <div class="list-text">Ojos cerrados. Respiren. El caos no los asusta; ustedes mandan en él. ¡Choque de puños!</div>
+                            <div class="list-text">Cierren los ojos. Guarden esta velocidad en su memoria. ¡Puños al centro!</div>
                         </li>
                         <li>
                             <div class="list-title"><span class="list-icon">💡</span> <strong>PNL:</strong></div>
                             <div class="list-text">"Yo mando en el caos; mi mente es mi fortaleza inquebrantable."</div>
-                        </li>
-                        <li>
-                            <div class="list-title"><span class="list-icon">🏆</span> <strong>Reflexión:</strong></div>
-                            <div class="list-text">¿Cómo mantuviste la calma hoy cuando todo era rápido? ¡Eso es liderazgo!</div>
                         </li>
                     </ul>
                 </div>
                 <div class="content-bottom">
                     <div class="timer-display">05:00</div>
                     <div class="navigation-buttons">
-                        <button class="nav-button prevBtn" onclick="navigate(-1)">Anterior</button>
-                        <button class="nav-button nextBtn" onclick="navigate(1)" disabled>Finalizar</button>
+                        <button class="nav-button prevBtn" onclick="navigate(-1)">Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)" disabled>Fin</button>
                     </div>
                 </div>
             </div>
